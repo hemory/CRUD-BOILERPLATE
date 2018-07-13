@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using TheRoundTableApplication.Models;
 
 namespace TheRoundTableApplication
 {
@@ -22,6 +24,9 @@ namespace TheRoundTableApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddDbContext<TheRoundTableApplicationContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("TheRoundTableApplicationContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
